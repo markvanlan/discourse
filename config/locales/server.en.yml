@@ -4668,6 +4668,7 @@ en:
     actions:
       agree:
         title: "Agree..."
+        description: "Agree with flag and ..."
       agree_and_keep:
         title: "Keep Post"
         description: "Agree with flag and keep the post unchanged."
@@ -4694,6 +4695,7 @@ en:
         title: "Delete"
       delete:
         title: "Delete..."
+        description: "Delete post and ..."
       delete_and_ignore:
         title: "Delete Post and Ignore"
         description: "Delete post; if the first post, delete the topic as well"
@@ -4713,8 +4715,10 @@ en:
         description: "Restore the post so that all users can see it."
       disagree:
         title: "Disagree"
+        description: "Disagree with flag"
       ignore:
         title: "Ignore"
+        description: "Ignore flag"
       approve:
         title: "Approve"
       approve_post:
