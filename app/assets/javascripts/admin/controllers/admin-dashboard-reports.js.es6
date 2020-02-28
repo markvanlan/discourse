@@ -4,21 +4,25 @@ import Controller from "@ember/controller";
 
 const { get } = Ember;
 
+export const filterAdminReports = function(reports, filter) {
+  if (filter) {
+    filter = filter.toLowerCase();
+    return reports.filter(report => {
+      return (
+        (get(report, "title") || "").toLowerCase().indexOf(filter) > -1 ||
+        (get(report, "description") || "").toLowerCase().indexOf(filter) > -1
+      );
+    });
+  }
+  return reports;
+};
+
 export default Controller.extend({
   filter: null,
 
   @discourseComputed("model.[]", "filter")
   filterReports(reports, filter) {
-    if (filter) {
-      filter = filter.toLowerCase();
-      return reports.filter(report => {
-        return (
-          (get(report, "title") || "").toLowerCase().indexOf(filter) > -1 ||
-          (get(report, "description") || "").toLowerCase().indexOf(filter) > -1
-        );
-      });
-    }
-    return reports;
+    return filterAdminReports(reports, filter);
   },
 
   actions: {
