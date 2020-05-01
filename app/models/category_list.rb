@@ -86,6 +86,10 @@ class CategoryList
       subcategories: [:topic_only_relative_url]
     ).secured(@guardian)
 
+    if Category.preloaded_custom_fields.present?
+      Category.preload_custom_fields(@categories, Category.preloaded_custom_fields)
+    end
+
     @categories = @categories.where("categories.parent_category_id = ?", @options[:parent_category_id].to_i) if @options[:parent_category_id].present?
 
     @categories = self.class.order_categories(@categories)

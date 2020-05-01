@@ -267,6 +267,13 @@ class Plugin::Instance
     end
   end
 
+  # Applies to all sites in a multisite environment. Ignores plugin.enabled?
+  def add_preloaded_category_custom_field(field)
+    reloadable_patch do |plugin|
+      ::Category.preloaded_custom_fields << field
+    end
+  end
+
   # Add a permitted_create_param to Post, respecting if the plugin is enabled
   def add_permitted_post_create_param(name, type = :string)
     reloadable_patch do |plugin|

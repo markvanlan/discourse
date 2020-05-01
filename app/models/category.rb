@@ -140,6 +140,9 @@ class Category < ActiveRecord::Base
   # Allows us to skip creating the category definition topic in tests.
   attr_accessor :skip_category_definition
 
+  cattr_accessor :preloaded_custom_fields
+  self.preloaded_custom_fields = Set.new
+
   @topic_id_cache = DistributedCache.new('category_topic_ids')
 
   def self.topic_ids
