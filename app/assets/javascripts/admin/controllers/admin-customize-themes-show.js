@@ -10,10 +10,13 @@ import {
 import Controller from "@ember/controller";
 import discourseComputed from "discourse-common/utils/decorators";
 import { url } from "discourse/lib/computed";
+import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import showModal from "discourse/lib/show-modal";
 import ThemeSettings from "admin/models/theme-settings";
 import { THEMES, COMPONENTS } from "admin/models/theme";
+import highlightSyntax from "discourse/lib/highlight-syntax";
+import { escapeExpression } from "discourse/lib/utilities";
 import EmberObject from "@ember/object";
 
 const THEME_UPLOAD_VAR = 2;
@@ -219,8 +222,38 @@ export default Controller.extend({
   actions: {
     updateToLatest() {
       this.set("updatingRemote", true);
-      this.model
-        .updateToLatest()
+      ajax(this.model.diffLocalChangesUrl)
+        .then(json => {
+          if (!json) {
+            return this.model
+              .save({ remote_update: true })
+              .then(() => this.model.set("changed", false));
+          }
+          if (json.error) {
+            bootbox.alert(
+              I18n.t("generic_error_with_reason", {
+                error: json.error
+              })
+            );
+          } else if (json.diff) {
+            bootbox.confirm(
+              I18n.t("admin.customize.theme.update_confirm") +
+                `<pre><code class="diff">${escapeExpression(
+                  json.diff
+                )}</code></pre>`,
+              I18n.t("cancel"),
+              I18n.t("admin.customize.theme.update_confirm_yes"),
+              result => {
+                if (result) {
+                  return this.model
+                    .save({ remote_update: true })
+                    .then(() => this.model.set("changed", false));
+                }
+              }
+            );
+            highlightSyntax(undefined, this.siteSettings);
+          }
+        })
         .catch(popupAjaxError)
         .finally(() => {
           this.set("updatingRemote", false);
