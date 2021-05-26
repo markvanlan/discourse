@@ -44,6 +44,14 @@ export default Controller.extend({
     discourseDebounce(this, this._setName, filter, 500);
   },
 
+  @action
+  onGroupChosen(groupId, group) {
+    this.set("nameInput", `@${group.name}`);
+    // this.set("name", `@${group.name}`)
+    // eslint-disable-next-line no-console
+    console.log(groupId, group);
+  },
+
   _setName(name) {
     this.set("name", name);
   },

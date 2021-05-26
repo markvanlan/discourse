@@ -19,11 +19,13 @@
                 {{i18n "directory.total_rows" count=model.totalRows}}
               {{/if}}
             </span>
-            {{input
-              value=(readonly nameInput)
-              input=(action "onFilterChanged" value="target.value")
-              placeholderKey="directory.filter_name"
-              class="filter-name no-blur"
+
+            {{user-group-filter
+              onChange=(action "onGroupChosen")
+              options=(hash
+                onFilterChanged=(action "onFilterChanged")
+                filterValue=nameInput
+              )
             }}
           </div>
         </div>

@@ -11,11 +11,12 @@
             {{lastUpdatedAt}}
           </div>
         {{/if}}
-        {{input
-          value=(readonly nameInput)
-          input=(action "onFilterChanged" value="target.value")
-          placeholderKey="directory.filter_name"
-          class="filter-name no-blur"
+
+        {{user-group-filter
+          options=(hash
+            onFilterChanged=(action "onFilterChanged")
+            filterValue=nameInput
+          )
         }}
       </div>
 
