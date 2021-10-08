@@ -156,6 +156,10 @@ class Plugin::Instance
     end
   end
 
+  def register_notification_channel(channel, &block)
+    DiscoursePluginRegistry.register_notification_channel(channel, &block)
+  end
+
   def whitelist_staff_user_custom_field(field)
     Discourse.deprecate("whitelist_staff_user_custom_field is deprecated, use the allow_staff_user_custom_field.", drop_from: "2.6")
     allow_staff_user_custom_field(field)

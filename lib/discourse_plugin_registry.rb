@@ -69,6 +69,7 @@ class DiscoursePluginRegistry
   define_register :seedfu_filter, Set
   define_register :demon_processes, Set
   define_register :groups_callback_for_users_search_controller_action, Hash
+  define_register :notification_channels, Set
 
   define_filtered_register :staff_user_custom_fields
   define_filtered_register :public_user_custom_fields
@@ -90,6 +91,13 @@ class DiscoursePluginRegistry
   define_filtered_register :reviewable_score_links
 
   define_filtered_register :presence_channel_prefixes
+
+  def self.register_notification_channel(channel, &block)
+    self.notification_channels << {
+      channel: channel,
+      filter_proc: block
+    }
+  end
 
   def self.register_auth_provider(auth_provider)
     self.auth_providers << auth_provider

@@ -123,6 +123,20 @@ class Notification < ActiveRecord::Base
                        )
   end
 
+  def self.channel_for_type(type)
+    [:chat_mention, :chat_message].include?(type.to_sym) ?
+      :chat :
+      :core
+  end
+
+  def self.channels_for(user)
+    channels = [:core]
+    DiscoursePluginRegistry.notification_channels.each do |channel|
+      channels << channel[:channel] if channel[:filter_proc].call(user)
+    end
+    channels
+  end
+
   def self.high_priority_types
     @high_priority_types ||= [
       types[:private_message],
