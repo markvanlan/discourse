@@ -129,10 +129,13 @@ class Notification < ActiveRecord::Base
       :core
   end
 
-  def self.channels_for(user)
-    channels = [:core]
+  def self.extra_channels_for(user)
+    channels = []
     DiscoursePluginRegistry.notification_channels.each do |channel|
-      channels << channel[:channel] if channel[:filter_proc].call(user)
+      begin
+        channels << channel[:channel] if channel[:filter_proc].call(user)
+      rescue
+      end
     end
     channels
   end

@@ -618,8 +618,8 @@ class ApplicationController < ActionController::Base
       report, each_serializer: TopicTrackingStateSerializer, scope: guardian
     )
     store_preloaded("topicTrackingStates", MultiJson.dump(serializer))
-    notification_channels = Notification.channels_for(current_user)
-    store_preloaded("notificationChannels", MultiJson.dump(notification_channels))
+    extra_notification_channels = Notification.extra_channels_for(current_user)
+    store_preloaded("extraNotificationChannels", MultiJson.dump(extra_notification_channels))
   end
 
   def custom_html_json
