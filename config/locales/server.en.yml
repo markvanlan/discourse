@@ -684,6 +684,18 @@ en:
       trust_level_2: "trust_level_2"
       trust_level_3: "trust_level_3"
       trust_level_4: "trust_level_4"
+    default_full_names:
+      everyone: "Everyone"
+      admins: "Admins"
+      moderators: "Moderators"
+      staff: "Staff"
+      anonymous_users: "Anonymous users"
+      logged_in_users: "Logged in users"
+      trust_level_0: "Trust level 0"
+      trust_level_1: "Trust level 1"
+      trust_level_2: "Trust level 2"
+      trust_level_3: "Trust level 3"
+      trust_level_4: "Trust level 4"
     default_descriptions:
       everyone: "Automatic group including all members"
       staff: "Automatic group including admins and moderators"
@@ -2054,6 +2066,7 @@ en:
     include_secure_categories_in_tag_counts: "When enabled, count of topics for a tag will include topics that are in read restricted categories for all users. When disabled, normal users are only shown a count of topics for a tag where all the topics are in public categories."
     display_personal_messages_tag_counts: "When enabled, count of personal messages tagged with a given tag will be displayed."
     top_menu: "Determine which items appear in the homepage navigation, and in what order."
+    custom_homepage_crawler_route: "Route shown to web crawlers when a custom homepage is enabled."
     post_menu: "Configure the visibility and order of default post menu items. Additional items added by plugins or themes are managed separately and won’t appear in this list."
     post_menu_hidden_items: "The menu items to hide by default in the post menu unless an expansion ellipsis is clicked on. Additional items added by plugins or themes are managed separately and won’t appear in this list."
     share_links: "Determine which items appear on the share dialog, and in what order."
@@ -3422,6 +3435,7 @@ en:
       one: "User %{username} has %{count} post in a public topic or personal message, so they can't be deleted."
       other: "User %{username} has %{count} posts in public topics or personal messages, so they can't be deleted."
     cannot_bulk_delete: "One or more users cannot be deleted either because they're an admin, have too many posts or have a very old post."
+    cannot_bulk_suspend: "One or more of the selected users can't be suspended."
     cannot_remove_all_auth: "You must have at least one associated account, a passkey, or a password set."
 
   unsubscribe_mailer:
